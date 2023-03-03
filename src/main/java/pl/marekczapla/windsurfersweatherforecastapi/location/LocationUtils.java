@@ -21,5 +21,4 @@ public class LocationUtils {
         }
         return true;
     }
-
 }

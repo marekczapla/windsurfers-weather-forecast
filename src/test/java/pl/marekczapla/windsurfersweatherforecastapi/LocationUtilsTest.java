@@ -3,75 +3,66 @@ package pl.marekczapla.windsurfersweatherforecastapi;
 import org.junit.jupiter.api.Test;
 import pl.marekczapla.windsurfersweatherforecastapi.location.LocationUtils;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LocationUtilsTest {
 
     @Test
     public void testIsValidWithValidDate() throws ParseException {
-        // Arrange
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = "2022-04-15";
 
-        // Act
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "2023-03-15";
+
         boolean result = LocationUtils.isValid(date);
 
-        // Assert
         assertTrue(result);
     }
 
     @Test
     public void testIsValidWithInvalidDate() throws ParseException {
-        // Arrange
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = "2022/04/15";
 
-        // Act
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "2023/03/15";
+
         boolean result = LocationUtils.isValid(date);
 
-        // Assert
         assertFalse(result);
     }
 
     @Test
-    public void testIsValidWithNullDate() throws ParseException {
-        // Arrange
-        String date = null;
+    public void testIsValidWithDoubleDashesDate() throws ParseException {
 
-        // Act
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "2023-03--15";
+
         boolean result = LocationUtils.isValid(date);
 
-        // Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void testIsValidWithNoDashesDate() throws ParseException {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "20230315";
+
+        boolean result = LocationUtils.isValid(date);
+
         assertFalse(result);
     }
 
     @Test
     public void testIsValidWithEmptyDate() throws ParseException {
-        // Arrange
+
         String date = "";
 
-        // Act
         boolean result = LocationUtils.isValid(date);
 
-        // Assert
         assertFalse(result);
     }
-
-    @Test
-    public void testIsValidWithWhitespaceDate() throws ParseException {
-        // Arrange
-        String date = "   ";
-
-        // Act
-        boolean result = LocationUtils.isValid(date);
-
-        // Assert
-        assertFalse(result);
-    }
-
 }

@@ -33,6 +33,4 @@ public class AppController {
         log.info("Best weather for windsurfing is :: {}", windsurfersAppResponse);
         return ResponseEntity.ok().body(windsurfersAppResponse);
     }
-
-
 }

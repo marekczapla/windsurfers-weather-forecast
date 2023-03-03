@@ -1,5 +1,6 @@
 package pl.marekczapla.windsurfersweatherforecastapi.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

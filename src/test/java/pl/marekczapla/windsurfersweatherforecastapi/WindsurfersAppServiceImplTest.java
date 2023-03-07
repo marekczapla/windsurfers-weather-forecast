@@ -10,7 +10,11 @@ import pl.marekczapla.windsurfersweatherforecastapi.model.WindsurfersAppResponse
 import pl.marekczapla.windsurfersweatherforecastapi.service.WindsurfersAppService;
 import pl.marekczapla.windsurfersweatherforecastapi.service.WindsurfersAppServiceImpl;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,8 +73,11 @@ public class WindsurfersAppServiceImplTest {
 
     @Test
     void testGetBestLocationWeatherForecast() {
+        Date date = new Date();
+        LocalDateTime tomorrowDate = LocalDateTime.from(date.toInstant().atZone(ZoneId.of("UTC"))).plusDays(1);
+        String strDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(tomorrowDate);
         WindsurfersAppService service = new WindsurfersAppServiceImpl(new RestTemplate());
-        WindsurfersAppResponse response = service.getBestLocationWeatherForecast("2023-03-06");
+        WindsurfersAppResponse response = service.getBestLocationWeatherForecast(strDate);
         assertNotNull(response);
         assertNotNull(response.getCity());
         assertNotNull(response.getCountry());

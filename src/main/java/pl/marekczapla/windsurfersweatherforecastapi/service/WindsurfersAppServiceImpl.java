@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WindsurfersAppServiceImpl implements WindsurfersAppService {
     private final RestTemplate restTemplate;
-    private String API_URL = "https://api.weatherbit.io/v2.0/forecast/daily?city=%s&key=%s";
-    private String API_KEY = "4666b281bc134a8e85b873a0f63cc4bc";
+    private final String API_URL = "https://api.weatherbit.io/v2.0/forecast/daily?city=%s&key=%s";
+    private final String API_KEY = "4666b281bc134a8e85b873a0f63cc4bc";
     private final List<String> citiesList = List.of("jastarnia", "bridgetown", "fortaleza", "pissouri", "petite_case_noyale");
     @Override
     public List<WeatherBitResponse> getWeatherBitResponseList() {
